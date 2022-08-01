@@ -5,17 +5,16 @@
     <link rel="stylesheet" href="style.css">
   </head>
     <h1>Library</h1>
-    <ul class="itemxs">
-      <li class="nav-item"><a href="{{ url_for('members') }}" class="nav-link">Members</a></li>
-      <li class="nav-item"><a href="{{ url_for('transactions') }}" class="nav-link">Transactions</a></li>
-    </ul>
-    <div class="Bookx">
+    <div class="left">
+      <li class="data-item"><a href="{{ url_for('members') }}" class="nav-link">Members</a></li>
+      <li class="data-item"><a href="{{ url_for('transactions') }}" class="nav-link">Transactions</a></li>
+    </div>
+
+    <div class="right">
       <h2>Books</h2>
       <div class="book-edits">
-        <ul class="itemx">
           <li class="book-item"><a href="{{ url_for('members') }}" class="nav-link">Delete Book</a></li>
-          <li class="book-item"><a href="{{ url_for('transactions') }}" class="nav-link">add book</a></li>
-        </ul>
+          <li class="book-item"><a href="{{ url_for('transactions') }}" class="nav-link">Add Book</a></li>
       </div>
       <div class="issue-elements">
         <li class="issue-item"><a href="{{ url_for('members') }}" class="nav-link">Issue Book</a></li>
