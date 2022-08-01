@@ -4,6 +4,7 @@
     <title>Library</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
   </head>
+  <body>
     <h1>Library</h1>
     <div class="left">
       <li class="data-item"><a href="#" class="nav-link">Members</a></li>
@@ -12,21 +13,28 @@
 
     <div class="right">
       <h2>Books</h2>
+      <form class="search_book" action="#" method="POST">
+        <p>Find a book:</p>
+        <p><input type = "text" name="bknm"/></p>
+        <p><input type = "submit" value="Search"/></p>
+      </form>
       {% for book in books %}
     <div class="card">
       <div class="card-body">
         <h3>{{ book.title }}</h3>
         <p>{{ book.quantity }} available</p>
+        <a href="{{ url_for('delete', book_n=book.id) }}" class="btn btn-danger">Delete</a>
       </div>
     </div>
   {% endfor %}
       <div class="book-edits">
           <li class="book-item"><a href="#" class="nav-link">Delete Book</a></li>
-          <li class="book-item"><a href="#" class="nav-link">Add Book</a></li>
+          <li class="book-item"><a href="{{ url_for('add') }}" class="nav-link">Add Book</a></li>
       </div>
       <div class="issue-elements">
         <li class="issue-item"><a href="#" class="nav-link">Issue Book</a></li>
         <li class="issue-item"><a href="#" class="nav-link">Return book</a></li>
       </div>
     </div>
+  </body>
 </html>
