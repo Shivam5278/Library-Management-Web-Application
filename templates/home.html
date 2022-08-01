@@ -2,23 +2,31 @@
 <html lang="en">
   <head>
     <title>Library</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
   </head>
     <h1>Library</h1>
     <div class="left">
-      <li class="data-item"><a href="{{ url_for('members') }}" class="nav-link">Members</a></li>
-      <li class="data-item"><a href="{{ url_for('transactions') }}" class="nav-link">Transactions</a></li>
+      <li class="data-item"><a href="#" class="nav-link">Members</a></li>
+      <li class="data-item"><a href="#" class="nav-link">Transactions</a></li>
     </div>
 
     <div class="right">
       <h2>Books</h2>
+      {% for book in books %}
+    <div class="card">
+      <div class="card-body">
+        <h3>{{ book.title }}</h3>
+        <p>{{ book.quantity }} available</p>
+      </div>
+    </div>
+  {% endfor %}
       <div class="book-edits">
-          <li class="book-item"><a href="{{ url_for('members') }}" class="nav-link">Delete Book</a></li>
-          <li class="book-item"><a href="{{ url_for('transactions') }}" class="nav-link">Add Book</a></li>
+          <li class="book-item"><a href="#" class="nav-link">Delete Book</a></li>
+          <li class="book-item"><a href="#" class="nav-link">Add Book</a></li>
       </div>
       <div class="issue-elements">
-        <li class="issue-item"><a href="{{ url_for('members') }}" class="nav-link">Issue Book</a></li>
-        <li class="issue-item"><a href="{{ url_for('transactions') }}" class="nav-link">Return book</a></li>
+        <li class="issue-item"><a href="#" class="nav-link">Issue Book</a></li>
+        <li class="issue-item"><a href="#" class="nav-link">Return book</a></li>
       </div>
     </div>
 </html>
