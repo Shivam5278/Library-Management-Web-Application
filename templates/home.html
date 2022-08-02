@@ -1,11 +1,7 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Library</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
-  </head>
-  <body>
-    <h1>Library</h1>
+{% extends "base.html" %}
+
+{% block main %}
+
     <div class="left">
       <li class="data-item"><a href="#" class="nav-link">Members</a></li>
       <li class="data-item"><a href="#" class="nav-link">Transactions</a></li>
@@ -36,5 +32,4 @@
         <li class="issue-item"><a href="#" class="nav-link">Return book</a></li>
       </div>
     </div>
-  </body>
-</html>
+{% endblock %}
