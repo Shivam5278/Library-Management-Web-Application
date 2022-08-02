@@ -14,18 +14,53 @@
         <p><input type = "text" name="bknm"/></p>
         <p><input type = "submit" value="Search"/></p>
       </form>
-      {% for book in books %}
-    <div class="card">
-      <div class="card-body">
-        <h3>{{ book.title }}</h3>
-        <p>{{ book.quantity }} available</p>
-        <a href="{{ url_for('delete', book_n=book.id) }}" class="btn btn-danger">Delete</a>
-      </div>
-    </div>
-  {% endfor %}
+      <table class="fixedtable" border="1">
+        <tbody>
+          <tr>
+            <td colspan="3">
+              <div class="scro">
+                <table id="table" >
+                  <thead  >
+                    <tr>
+                      <th >Book name</th>
+                      <th>quantity</th>
+                      <th>options</th>
+                    </tr>
+                  </thead>
+                  {% for book in books %}
+                          <tr class="hov" >
+                            <td onclick="gen(this)">
+                              {{ book.title }}
+                            </td>
+                            <td>{{ book.quantity }}</td>
+                            <td><a href="{{ url_for('delete', book_n=book.id) }}" class="btn btn-danger">Delete</a></td>
+                          </tr>
+                  {% endfor %}
+                </table>
+
+                <script>
+
+             var table = document.getElementById('table');
+
+             for(var i = 1; i < table.rows.length; i++)
+             {
+                 table.rows[i].onclick = function()
+                 {
+                      //rIndex = this.rowIndex;
+                      document.getElementById("fname").value = this.cells[0].innerHTML;
+                 };
+             }
+
+      </script>
+      First Name:<input type="text" name="fnazme" id="fname"><br><br>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <div class="book-edits">
-          <li class="book-item"><a href="#" class="nav-link">Delete Book</a></li>
-          <li class="book-item"><a href="{{ url_for('add') }}" class="nav-link">Add Book</a></li>
+          <li class="book-item"><a href="{{ url_for('delete', book_n=) }}" id="fname" class="nav-link">Delete Book</a></li>
+          <li class="book-item"><a href="{{ url_for('adds') }}" class="nav-link">Add Book</a></li>
       </div>
       <div class="issue-elements">
         <li class="issue-item"><a href="#" class="nav-link">Issue Book</a></li>

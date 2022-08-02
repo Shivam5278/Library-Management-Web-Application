@@ -26,6 +26,7 @@ a{
   left: 800px;
 }
 
+
 .data-item{
   margin:10px;
 }
@@ -59,4 +60,12 @@ a{
 
 .book-item{
   margin: 10px;
+}
+.hov:hover {
+  background-color: skyblue;
+}
+.scro{
+    overflow:scroll;
+    height:250px;
+    overflow-x: hidden;
 }

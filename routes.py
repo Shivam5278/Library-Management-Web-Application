@@ -5,7 +5,7 @@ from datetime import datetime
 import sys
 import models
 import forms
-#from datas import data
+from datas import bookid
 @app.route('/')
 @app.route('/index')
 @app.route('/home', methods = ['POST', 'GET'])
@@ -41,13 +41,37 @@ def delete(book_n):
     flash(f'Task with id {book_n} does not exit')
     return redirect(url_for('home'))
 
-@app.route('/add', methods=['GET', 'POST'])
-def add():
-    form = forms.AddTaskForm()
-    if form.validate_on_submit():
-        task = models.Books(title=form.title.data, author="a" ,quantity=5)
+@app.route('/add/<a>', methods=['GET', 'POST'])
+def add(a):
+    form = a
+    found_book = models.Books.query.filter_by(title=form).first()
+    if found_book:
+        flash('Book already in list')
+    else:
+        task = models.Books(title=form, author="a" ,quantity=10)
         db.session.add(task)
         db.session.commit()
         flash('Book added')
         return redirect(url_for('home'))
-    return render_template('add.html', form=form)
+    return redirect(url_for('adds'))
+
+@app.route('/adds', methods=['GET', 'POST'])
+def adds():
+    #
+    form = forms.AddTaskForm()
+    if form.validate_on_submit():
+        found_book = models.Books.query.filter_by(title=form.title.data).first()
+        if found_book:
+            flash('Book already in list')
+        else:
+            x=form.title.data
+            booksa=bookid(x)
+            s=[]
+            #print(titlex)
+            #task = models.Books(title=booksa[1], author="a" ,quantity=6)
+            #db.session.add(task)
+            #db.session.commit()
+            #flash('Book added')
+            return render_template('adds.html',s=booksa, form=form)
+        #return redirect(url_for('home'))
+    return render_template('adds.html', form=form)
