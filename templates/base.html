@@ -4,7 +4,8 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
   </head>
   <body>
-    <h1>Library</h1>
+    <a href="{{ url_for('home') }}" class="btn btn-danger"><h1>Library</h1></a>
+
     <br>
       {% with messages = get_flashed_messages() %}
         {% if messages %}

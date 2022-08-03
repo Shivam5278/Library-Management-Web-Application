@@ -2,18 +2,7 @@
 
 {% block main %}
 
-    <div class="left">
-      <li class="data-item"><a href="{{ url_for('members') }}" class="nav-link">Members</a></li>
-      <li class="data-item"><a href="{{ url_for('transactions') }}" class="nav-link">Transactions</a></li>
-    </div>
-
     <div class="right">
-      <h2>Books</h2>
-      <form class="search_book" action="#" method="POST">
-        <p>Find a book:</p>
-        <p><input type = "text" name="bknm"/></p>
-        <p><input type = "submit" value="Search"/></p>
-      </form>
       <table class="fixedtable" border="1">
         <tbody>
           <tr>
@@ -22,18 +11,18 @@
                 <table id="table" >
                   <thead  >
                     <tr>
-                      <th >Book name</th>
-                      <th>quantity</th>
-                      <th>options</th>
+                      <th >Name</th>
+                      <th>ID</th>
+                      <th>Options</th>
                     </tr>
                   </thead>
-                  {% for book in books %}
+                  {% for member in members1 %}
                           <tr class="hov" >
                             <td onclick="gen(this)">
-                              {{ book.title }}
+                              {{ member.name_m }}
                             </td>
-                            <td>{{ book.quantity }}</td>
-                            <td><a href="{{ url_for('delete', book_n=book.id) }}" class="btn btn-danger">Delete</a></td>
+                            <td>{{ member.memid_m }}</td>
+                            <td><a href="{{ url_for('delete', book_n=member.id) }}" class="btn btn-danger">Delete</a></td>
                           </tr>
                   {% endfor %}
                 </table>
@@ -56,8 +45,8 @@
         </tbody>
       </table>
       <div class="book-edits">
-          <li class="book-item"><a href="#" id="fname" class="nav-link">Delete Book</a></li>
-          <li class="book-item"><a href="{{ url_for('adds') }}" class="nav-link">Add Book</a></li>
+          <li class="book-item"><a href="#" id="fname" class="nav-link">Delete Member</a></li>
+          <li class="book-item"><a href="{{ url_for('addme') }}" class="nav-link">Add Member</a></li>
       </div>
       <div class="issue-elements">
         <li class="issue-item"><a href="#" class="nav-link">Issue Book</a></li>

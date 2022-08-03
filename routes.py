@@ -67,11 +67,56 @@ def adds():
             x=form.title.data
             booksa=bookid(x)
             s=[]
-            #print(titlex)
-            #task = models.Books(title=booksa[1], author="a" ,quantity=6)
-            #db.session.add(task)
-            #db.session.commit()
-            #flash('Book added')
             return render_template('adds.html',s=booksa, form=form)
         #return redirect(url_for('home'))
     return render_template('adds.html', form=form)
+
+
+@app.route('/members', methods = ['POST', 'GET'])
+def members():
+    members1 = models.Members.query.all()
+    if request.method =="POST":
+        print('x')
+        #session["book_name"] = request.form["bknm"]
+        #return redirect(url_for("booke"))
+    else:
+        return render_template('members.html', members1=members1)
+
+
+@app.route('/addme', methods = ['POST', 'GET'])
+def addme():
+    form = forms.AddTaskForm()
+    if form.validate_on_submit():
+        task = models.Members(name_m=form.title.data, memid_m=5)
+        db.session.add(task)
+        db.session.commit()
+        flash('Member added')
+        return redirect(url_for('members'))
+    return render_template('addme.html', form=form)
+
+
+
+@app.route('/transactions', methods = ['POST', 'GET'])
+def transactions():
+    transactions1 = models.Transactions.query.all()
+    if request.method =="POST":
+        print('x')
+        #session["book_name"] = request.form["bknm"]
+        #return redirect(url_for("booke"))
+    else:
+        return render_template('transactions.html', transactions1=transactions1)
+
+
+
+
+
+
+@app.route('/isreturn/<val>')#, method = ['POST', 'GET'])
+def isreturn(val):
+    if val == "issue":
+        print(val)
+    elif val == "return":
+        print(val)
+    else:
+        flash('Page not found!')
+        return redirect(url_for('home'))
