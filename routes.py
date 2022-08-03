@@ -111,12 +111,12 @@ def transactions():
 
 
 
-@app.route('/isreturn/<val>')#, method = ['POST', 'GET'])
+@app.route('/isreturn<val>')#, method = ['POST', 'GET'])
 def isreturn(val):
     if val == "issue":
-        print(val)
+        return render_template('isreturn.html', transaction=val)
     elif val == "return":
-        print(val)
+        return render_template('isreturn.html', transaction=val)
     else:
         flash('Page not found!')
         return redirect(url_for('home'))

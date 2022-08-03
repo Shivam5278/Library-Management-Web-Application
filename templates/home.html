@@ -60,8 +60,8 @@
           <li class="book-item"><a href="{{ url_for('adds') }}" class="nav-link">Add Book</a></li>
       </div>
       <div class="issue-elements">
-        <li class="issue-item"><a href="#" class="nav-link">Issue Book</a></li>
-        <li class="issue-item"><a href="#" class="nav-link">Return book</a></li>
+        <li class="issue-item"><a href="{{ url_for('isreturn', val='issue') }}" class="nav-link">Issue Book</a></li>
+        <li class="issue-item"><a href="{{ url_for('isreturn', val='return') }}" class="nav-link">Return book</a></li>
       </div>
     </div>
 {% endblock %}
