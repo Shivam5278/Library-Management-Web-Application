@@ -17,23 +17,22 @@
       <table class="fixedtable" border="1">
         <tbody>
           <tr>
-            <td colspan="3">
+            <td colspan="2">
               <div class="scro">
                 <table id="table" >
                   <thead  >
                     <tr>
                       <th >Book name</th>
                       <th>quantity</th>
-                      <th>options</th>
                     </tr>
                   </thead>
                   {% for book in books %}
                           <tr class="hov" >
                             <td onclick="gen(this)">
-                              {{ book.title }}
+
+                              <a href="{{ url_for('home', a=book.id) }}" class="btn btn-danger">{{ book.title }}</a>
                             </td>
                             <td>{{ book.quantity }}</td>
-                            <td><a href="{{ url_for('delete', book_n=book.id) }}" class="btn btn-danger">Delete</a></td>
                           </tr>
                   {% endfor %}
                 </table>
@@ -56,7 +55,7 @@
         </tbody>
       </table>
       <div class="book-edits">
-          <li class="book-item"><a href="#" id="fname" class="nav-link">Delete Book</a></li>
+          <li class="book-item"><a href="{{ url_for('delete', book_n=id) }}" id="fname" class="nav-link">Delete Book</a></li>
           <li class="book-item"><a href="{{ url_for('adds') }}" class="nav-link">Add Book</a></li>
       </div>
       <div class="issue-elements">

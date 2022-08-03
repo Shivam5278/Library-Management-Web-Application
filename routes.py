@@ -8,15 +8,17 @@ import forms
 from datas import bookid
 @app.route('/')
 @app.route('/index')
-@app.route('/home', methods = ['POST', 'GET'])
-def home():
+@app.route('/home/<a>', methods = ['POST', 'GET'])
+def home(a=None):
     books = models.Books.query.all()
+    print(a)
     if request.method =="POST":
-
-        session["book_name"] = request.form["bknm"]
-        return redirect(url_for("booke"))
+        print(x)
     else:
-        return render_template('home.html', books=books)
+        if a==None:
+            return render_template('home.html', books=books, id=1)
+        else:
+            return render_template('home.html', books=books, id= a)
 
 @app.route("/book")
 def booke():
