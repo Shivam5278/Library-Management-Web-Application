@@ -10,52 +10,83 @@
     <div class="right">
       <h2>Books</h2>
       <form class="search_book" action="#" method="POST">
-        <p>Find a book:</p>
-        <p><input type = "text" name="bknm"/></p>
-        <p><input type = "submit" value="Search"/></p>
+        <p><input type = "text" id="myInput" onkeyup="myFunction()" placeholder="Search for a Book..."/></p>
       </form>
-      <table class="fixedtable" border="1">
-        <tbody>
-          <tr>
-            <td colspan="2">
-              <div class="scro">
-                <table id="table" >
-                  <thead  >
-                    <tr>
+
+                <table id="myTable"  >
+
+                    <tr class="header">
                       <th >Book name</th>
                       <th>quantity</th>
                     </tr>
-                  </thead>
-                  {% for book in books %}
-                          <tr class="hov" >
-                            <td onclick="gen(this)">
 
-                              <a href="{{ url_for('home', a=book.id) }}" class="btn btn-danger">{{ book.title }}</a>
+                  {% for book in books %}
+                          <tr class="hov" onclick="getIndex(this)" >
+                            <td >
+
+                              {{ book.title }}
                             </td>
                             <td>{{ book.quantity }}</td>
                           </tr>
                   {% endfor %}
                 </table>
-
+                <p id="index"></p>
                 <script>
-                  var table = document.getElementById('table');
-                  for(var i = 1; i < table.rows.length; i++)
-                  {
-                    table.rows[i].onclick = function()
-                    {
-                      //rIndex = this.rowIndex;
-                      document.getElementById("fname").value = this.cells[0].innerHTML;
-                    };
-                  }
 
-                </script>
+      function selectedRow(){
+
+          var index,
+              table = document.getElementById("myTable");
+
+          for(var i = 1; i < table.rows.length; i++)
+          {
+              table.rows[i].onclick = function()
+              {
+                   // remove the background from the previous selected row
+                  if(typeof index !== "undefined"){
+                     table.rows[index].classList.toggle("selected");
+                  }
+                  console.log(typeof index);
+                  // get the selected row index
+                  index = this.rowIndex;
+                  // add class selected to the row
+                  this.classList.toggle("selected");
+                  console.log(typeof index);
+               };
+          }
+
+      }
+      selectedRow();
+  </script>
+                <script>
+
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
       <div class="book-edits">
-          <li class="book-item"><a href="{{ url_for('delete', book_n=id) }}" id="fname" class="nav-link">Delete Book</a></li>
+          <li class="book-item"><a href="{{ url_for('delete', book_n=id) }}" id="" class="nav-link">Delete Book</a></li>
           <li class="book-item"><a href="{{ url_for('adds') }}" class="nav-link">Add Book</a></li>
       </div>
       <div class="issue-elements">
