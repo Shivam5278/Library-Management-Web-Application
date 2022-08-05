@@ -3,13 +3,14 @@
 {% block main %}
 
 
-    <div class="container-fluid">
+    <div class="container-fluid" >
       <form action="{{ url_for('adds') }}" method="post">
         {{ form.csrf_token }}
+        <p>Search for a Book, a Publisher or an Author...</p>
         <div class="row">
           <h3>Add Book</h3>
-          <div class="col">
-            {{ form.title(class="form-control") }}
+          <div class="col" >
+            {{ form.title(class="form-control" ) }}
           </div>
           <div class="col">
             {{ form.submit(class="btn btn-primary") }}
@@ -17,21 +18,28 @@
         </div>
       </form>
     </div>
+    <div class="Add_books">
+      <table id="myTable" class="Add_books">
+        <thead  >
+          <tr class="header">
+            <th width="50%">Book name</th>
+            <th >Author</th>
+            <th >Publisher</th>
+            <th ></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in range(books|length) %}
+                  <tr class="hov">
+                    <td >{{ books[i]}}</td>
+                    <td >{{ authors[i]}}</td>
+                    <td >{{ publishers[i]}}</td>
+                    <td><a href="{{ url_for('add',b=books[i],a=authors[i],p=publishers[i]) }}" class="btn btn-danger">Add Book</a></td>
+                  </tr>
+          {% endfor %}
+        </tbody>
 
-    <table >
-      <thead  >
-        <tr>
-          <th >Book name</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for book in s %}
-                <tr class="hov">
-                  <td >{{ book }}</td>
-                  <td><a href="{{ url_for('add',a= book) }}" class="btn btn-danger">Add Book</a></td>
-                </tr>
-        {% endfor %}
-      </tbody>
+      </table>
+    </div>
 
-    </table>
 {% endblock %}

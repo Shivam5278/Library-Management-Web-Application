@@ -10,25 +10,33 @@ ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
 def bookid(title):
-    url = 'https://frappe.io/api/method/frappe-library?title='+quote(title)
+    url1 = 'https://frappe.io/api/method/frappe-library?title='+quote(title)
+    url2 = 'https://frappe.io/api/method/frappe-library?authors='+quote(title)
+    url3 = 'https://frappe.io/api/method/frappe-library?publisher='+quote(title)
     #print(url)
-    fhand=urllib.request.urlopen(url)
-    data=fhand.read().decode()
+    book1=urllib.request.urlopen(url1)
+    data1=book1.read().decode()
+    author1=urllib.request.urlopen(url2)
+    data2=author1.read().decode()
+    publisher1=urllib.request.urlopen(url3)
+    data3=publisher1.read().decode()
     #print(data)
     bookidx=[]
     titlex=[]
-    pages=[]
-    info = json.loads(data)
+    pagesx=[]
+    authorx=[]
+    publisherx=[]
+    info1 = json.loads(data1)
+    info2 = json.loads(data2)
+    info3 = json.loads(data3)
+    info = info1['message'] + info2['message'] + info3['message']
+
     #bookid = input('Enter Reference ID: ')
     #print(info['message'][0]['bookID'])
-    for item in info['message']:
+    for item in info:
         bookidx.append(item['bookID'])
         titlex.append(item['title'])
-        pages.append(item['  num_pages'])
-    return titlex
-    #bookid = input('Enter Reference ID: ')
-    #a=bookidx.index(bookid)
-    #for i in titlex:
-    #    print(i)
-    #print(bookidx[1],':     ', titlex[1],'  Pages:',pages[1])
-    #{"error":"Invalid Parameters","total_records":4000,"allowed_params":["title","authors","isbn","publisher","page"]}
+        pagesx.append(item['  num_pages'])
+        authorx.append(item['authors'])
+        publisherx.append(item['publisher'])
+    return titlex ,authorx, publisherx

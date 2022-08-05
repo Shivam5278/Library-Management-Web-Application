@@ -2,12 +2,7 @@
 
 {% block main %}
 
-    <div class="left">
-      <li class="data-item"><a href="{{ url_for('members') }}" class="nav-link">Members</a></li>
-      <li class="data-item"><a href="{{ url_for('transactions') }}" class="nav-link">Transactions</a></li>
-    </div>
-
-    <div class="right">
+    <div class="Books">
       <h2>Books</h2>
       <form class="search_book" action="#" method="POST">
         <p><input type = "text" id="myInput" onkeyup="myFunction()" placeholder="Search for a Book..."/></p>
@@ -16,16 +11,15 @@
                 <table id="myTable"  >
 
                     <tr class="header">
-                      <th >Book name</th>
-                      <th>quantity</th>
+                      <th width="50%">Book name</th>
+                      <th>Author</th>
+                      <th>Quantity</th>
                     </tr>
 
                   {% for book in books %}
                           <tr class="hov" onclick="getIndex(this)" >
-                            <td >
-
-                              {{ book.title }}
-                            </td>
+                            <td >{{ book.title }}</td>
+                            <td >{{ book.author }}</td>
                             <td>{{ book.quantity }}</td>
                           </tr>
                   {% endfor %}
@@ -84,14 +78,20 @@ function myFunction() {
 </script>
 
               </div>
+              <nav class="navbar navbar-light bg-light">
+                <form class="form-inline">
+                  <button class="btn btn-outline-success" id="Add" type="button" onclick="location.href='{{ url_for('adds') }}'">Add Book</button>
+                  <button class="btn btn-outline-success" id="Delete" type="button" onclick="location.href='{{ url_for('delete', book_n=id) }}'">Delete Book</button>
 
-      <div class="book-edits">
-          <li class="book-item"><a href="{{ url_for('delete', book_n=id) }}" id="" class="nav-link">Delete Book</a></li>
-          <li class="book-item"><a href="{{ url_for('adds') }}" class="nav-link">Add Book</a></li>
-      </div>
-      <div class="issue-elements">
-        <li class="issue-item"><a href="{{ url_for('isreturn', val='issue') }}" class="nav-link">Issue Book</a></li>
-        <li class="issue-item"><a href="{{ url_for('isreturn', val='return') }}" class="nav-link">Return book</a></li>
-      </div>
+                </form>
+                </nav>
+                <nav class="navbar navbar-light bg-light">
+                <form class="form-inline">
+
+
+                  <button class="btn btn-outline-success" type="button" onclick="location.href='{{ url_for('isreturn', val='issue') }}'">Issue Book</button>
+                  <button class="btn btn-outline-success" type="button" onclick="location.href='{{ url_for('isreturn', val='issue') }}'">Return book</button>
+                </form>
+              </nav>
     </div>
 {% endblock %}

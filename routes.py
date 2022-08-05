@@ -11,7 +11,6 @@ from datas import bookid
 @app.route('/home/<a>', methods = ['POST', 'GET'])
 def home(a=None):
     books = models.Books.query.all()
-    print(a)
     if request.method =="POST":
         print(x)
     else:
@@ -43,14 +42,15 @@ def delete(book_n):
     flash(f'Task with id {book_n} does not exit')
     return redirect(url_for('home'))
 
-@app.route('/add/<a>', methods=['GET', 'POST'])
-def add(a):
-    form = a
-    found_book = models.Books.query.filter_by(title=form).first()
+@app.route('/add/<b>', methods=['GET', 'POST'])
+def add(b):
+    a  = request.args.get('a', None)
+    p  = request.args.get('p', None)
+    found_book = models.Books.query.filter_by(title=b).first()
     if found_book:
-        flash('Book already in list')
+        flash('Book already in Library!')
     else:
-        task = models.Books(title=form, author="a" ,quantity=10)
+        task = models.Books(title=b, author=a ,publisher=p, quantity=10)
         db.session.add(task)
         db.session.commit()
         flash('Book added')
@@ -59,19 +59,17 @@ def add(a):
 
 @app.route('/adds', methods=['GET', 'POST'])
 def adds():
-    #
-    form = forms.AddTaskForm()
-    if form.validate_on_submit():
-        found_book = models.Books.query.filter_by(title=form.title.data).first()
+    entry = forms.AddTaskForm()
+    if entry.validate_on_submit():
+        found_book = models.Books.query.filter_by(title=entry.title.data).first()
         if found_book:
-            flash('Book already in list')
+            flash('Book already available in Library!')
         else:
-            x=form.title.data
-            booksa=bookid(x)
-            s=[]
-            return render_template('adds.html',s=booksa, form=form)
+            x=entry.title.data
+            book_s, author_s, publisher_s=bookid(x)
+            return render_template('adds.html',books=book_s, authors=author_s, publishers= publisher_s, form=entry)
         #return redirect(url_for('home'))
-    return render_template('adds.html', form=form)
+    return render_template('adds.html', form=entry)
 
 
 @app.route('/members', methods = ['POST', 'GET'])

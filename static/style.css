@@ -19,11 +19,11 @@ a{
 }
 
 
-.right {
+.Books {
   list-style-type: none;
-  position: relative ;
-  top: -100px;
-  left: 800px;
+  position: relative;
+  top: -30px;
+  left: 100px;
 }
 
 
@@ -84,24 +84,27 @@ a{
 #myTable {
   overflow: scroll;
   overflow-y: scroll;
-  height: 300px;
-  width: 400px;
+  height: 25em;
   display: block;
   overflow-x: hidden;
   border-collapse: collapse; /* Collapse borders */
-  width: 40%; /* Full-width */
-  border: 1px solid #ddd; /* Add a grey border */
-  font-size: 18px; /* Increase font-size */
+  width: 1000px; /* Full-width */
+  border: 2px solid #ddd; /* Add a grey border */
+  font-size: 16px; /* Increase font-size */
 }
 
 #myTable th, #myTable td {
   text-align: left; /* Left-align text */
-  padding: 12px; /* Add padding */
+  padding: 10px;
+
+
+  /* Add padding */
 }
 
 #myTable tr {
   /* Add a bottom border to all table rows */
   border-bottom: 1px solid #ddd;
+
 }
 
 #myTable tr.header {
@@ -112,13 +115,42 @@ a{
 #myTable tr:hover{
   background-color: #f1f1f1
 }
-.header{
-
-
+.myTable thead .header{
     position: sticky;
     top: 0;
+    width: 1000px !important;
     z-index: 1; // any positive value, layer order is global
 }
 
-tr{cursor: pointer; transition: all .25s ease-in-out}
-          .selected{background-color: skyblue; }
+.nav-item{
+  font-size: 16;
+  position: sticky;
+  top: 200px;
+  z-index: 1;
+}
+#Add{
+  position: relative;
+  top: -410px;
+  left: 800px;
+}
+
+#Delete{
+  position: relative;
+  top: -410px;
+  left: 820px;
+}
+
+.container-fluid{
+  position: relative;
+  top: -50px;
+}
+.Add_books{
+  position: relative;
+  top: -25px;
+  width: 120%;
+  height: 500px;
+}
+
+#Add_books{
+  height: 120%;
+}
