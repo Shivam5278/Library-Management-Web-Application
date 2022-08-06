@@ -15,7 +15,7 @@ def home(a=None):
         print(x)
     else:
         if a==None:
-            return render_template('home.html', books=books, id=1)
+            return render_template('home.html', books=books, id=99999)
         else:
             return render_template('home.html', books=books, id= a)
 
@@ -67,9 +67,9 @@ def adds():
         else:
             x=entry.title.data
             book_s, author_s, publisher_s=bookid(x)
-            return render_template('adds.html',books=book_s, authors=author_s, publishers= publisher_s, form=entry)
+            return render_template('adds.html',books=book_s, authors=author_s, publishers= publisher_s, form=entry, ret=True)
         #return redirect(url_for('home'))
-    return render_template('adds.html', form=entry)
+    return render_template('adds.html', form=entry, ret=False)
 
 
 @app.route('/members', methods = ['POST', 'GET'])

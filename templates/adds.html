@@ -18,7 +18,10 @@
         </div>
       </form>
     </div>
+    {%if ret%}
+    {%if books %}
     <div class="Add_books">
+
       <table id="myTable" class="Add_books">
         <thead  >
           <tr class="header">
@@ -41,5 +44,24 @@
 
       </table>
     </div>
+
+
+    {%else%}
+    <h1 style="padding: 50px; padding-left:270px; color:grey">Not Found!</h1>
+    {%endif%}
+  {%endif%}
+  <!--div class=".bg-modal">
+    <div class="modal-content">
+      <div class="close">
+        +
+      </div>
+      <form class="" action="index.html" method="post">
+        <input id="a122" type="text" name="" value="" placeholder="Enter quantity:">
+        <a href="#" class="button">Submit</a>
+      </form>
+
+    </div>
+  </div-->
+
 
 {% endblock %}

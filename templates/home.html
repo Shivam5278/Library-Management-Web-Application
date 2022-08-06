@@ -7,6 +7,7 @@
       <form class="search_book" action="#" method="POST">
         <p><input type = "text" id="myInput" onkeyup="myFunction()" placeholder="Search for a Book..."/></p>
       </form>
+      {%set id= id|int%}
 
                 <table id="myTable"  >
 
@@ -15,43 +16,26 @@
                       <th>Author</th>
                       <th>Quantity</th>
                     </tr>
-
                   {% for book in books %}
-                          <tr class="hov" onclick="getIndex(this)" >
-                            <td >{{ book.title }}</td>
-                            <td >{{ book.author }}</td>
-                            <td>{{ book.quantity }}</td>
+                    {% if book.id==id %}
+
+                    <tr class="selected"  >
+
+                      <td onclick="location.href='{{ url_for('home', a=book.id) }}'"> {{ book.title }}</td>
+                      <td onclick="location.href='{{ url_for('home', a=book.id) }}'">{{ book.author }}</td>
+                      <td onclick="location.href='{{ url_for('home', a=book.id) }}'">{{ book.quantity }}</td>
+                    </tr>
+                    {% else %}
+                          <tr class="hov"  >
+
+                            <td onclick="location.href='{{ url_for('home', a=book.id) }}'" >{{ book.title }}</td>
+                            <td onclick="location.href='{{ url_for('home', a=book.id) }}'">{{ book.author }}</td>
+                            <td onclick="location.href='{{ url_for('home', a=book.id) }}'">{{ book.quantity }}</td>
                           </tr>
+                    {% endif %}
                   {% endfor %}
                 </table>
-                <p id="index"></p>
-                <script>
 
-      function selectedRow(){
-
-          var index,
-              table = document.getElementById("myTable");
-
-          for(var i = 1; i < table.rows.length; i++)
-          {
-              table.rows[i].onclick = function()
-              {
-                   // remove the background from the previous selected row
-                  if(typeof index !== "undefined"){
-                     table.rows[index].classList.toggle("selected");
-                  }
-                  console.log(typeof index);
-                  // get the selected row index
-                  index = this.rowIndex;
-                  // add class selected to the row
-                  this.classList.toggle("selected");
-                  console.log(typeof index);
-               };
-          }
-
-      }
-      selectedRow();
-  </script>
                 <script>
 
 function myFunction() {
