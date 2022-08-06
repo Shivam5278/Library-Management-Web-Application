@@ -19,14 +19,6 @@ def home(a=None):
         else:
             return render_template('home.html', books=books, id= a)
 
-@app.route("/book")
-def booke():
-    if "book_name" in session:
-        book = session["book_name"]
-        return f"<h1>{book}</h1>"
-    else:
-        return redirect(url_for("home"))
-
 @app.route('/delete/<book_n>', methods=['GET', 'POST'])
 def delete(book_n):
     form = forms.DeleteTaskForm()
@@ -71,16 +63,18 @@ def adds():
         #return redirect(url_for('home'))
     return render_template('adds.html', form=entry, ret=False)
 
-
 @app.route('/members', methods = ['POST', 'GET'])
-def members():
+@app.route('/members/<b>', methods = ['POST', 'GET'])
+def members(b=None):
     members1 = models.Members.query.all()
     if request.method =="POST":
         print('x')
-        #session["book_name"] = request.form["bknm"]
-        #return redirect(url_for("booke"))
     else:
-        return render_template('members.html', members1=members1)
+        if b==None:
+            return render_template('members.html', members1=members1, id=99999)
+        else:
+            return render_template('members.html', members1=members1, id= b)
+
 
 
 @app.route('/addme', methods = ['POST', 'GET'])

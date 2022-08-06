@@ -3,48 +3,70 @@
 {% block main %}
 
     <div class="right">
-      <table class="fixedtable" border="1">
-        <tbody>
-          <tr>
-            <td colspan="3">
-              <div class="scro">
-                <table id="table" >
-                  <thead  >
-                    <tr>
-                      <th >Name</th>
+      <h2>Members</h2>
+      <form class="search_book" action="#" method="POST">
+        <p><input type = "text" id="myInput" onkeyup="myFunction()" placeholder="Search for a Book..."/></p>
+      </form>
+{%set id= id|int%}
+                <table id="myTable" >
+
+                    <tr class="header">
                       <th>ID</th>
+                      <th width="50%">Name</th>
                       <th>Options</th>
                     </tr>
-                  </thead>
+
                   {% for member in members1 %}
-                          <tr class="hov" >
-                            <td onclick="gen(this)">
+                    {% if member.id_m==id %}
+                          <tr class="selected" >
+                            <td onclick="location.href='{{ url_for('members', b=member.id_m) }}'">{{ member.memid_m }}</td>
+                            <td onclick="location.href='{{ url_for('members', b=member.id_m) }}'">
                               {{ member.name_m }}
                             </td>
-                            <td>{{ member.memid_m }}</td>
                             <td><a href="{{ url_for('delete', book_n=member.id) }}" class="btn btn-danger">Delete</a></td>
                           </tr>
+                    {% else %}
+                    <tr class="hov"  >
+
+                      <td onclick="location.href='{{ url_for('members', b=member.id_m) }}'">{{ member.memid_m }}</td>
+                      <td onclick="location.href='{{ url_for('members', b=member.id_m) }}'">
+                        {{ member.name_m }}
+                      </td>
+                      <td><a href="{{ url_for('delete', book_n=member.id) }}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+              {% endif %}
+
                   {% endfor %}
                 </table>
 
-                <script>
-                  var table = document.getElementById('table');
-                  for(var i = 1; i < table.rows.length; i++)
-                  {
-                    table.rows[i].onclick = function()
-                    {
-                      //rIndex = this.rowIndex;
-                      document.getElementById("fname").value = this.cells[0].innerHTML;
-                    };
-                  }
 
-                </script>
+                <script>
+
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="book-edits">
+
+      <!--div class="book-edits">
           <li class="book-item"><a href="#" id="fname" class="nav-link">Delete Member</a></li>
           <li class="book-item"><a href="{{ url_for('addme') }}" class="nav-link">Add Member</a></li>
       </div>
@@ -52,5 +74,20 @@
         <li class="issue-item"><a href="#" class="nav-link">Issue Book</a></li>
         <li class="issue-item"><a href="#" class="nav-link">Return book</a></li>
       </div>
-    </div>
+    </div-->
+    <nav class="navbar navbar-light bg-light">
+      <form class="form-inline">
+        <button class="btn btn-outline-success" id="Add" type="button" onclick="location.href='{{ url_for('delete', book_n=id, t=2) }}'">Delete Member</button>
+        <button class="btn btn-outline-success" id="Delete" type="button" onclick="location.href='{{ url_for('addme') }}'">Add Member</button>
+
+      </form>
+      </nav>
+      <nav class="navbar navbar-light bg-light">
+      <form class="form-inline">
+
+
+        <button class="btn btn-outline-success" type="button" onclick="location.href='{{ url_for('isreturn', val='issue') }}'">Issue Book</button>
+        <button class="btn btn-outline-success" type="button" onclick="location.href='{{ url_for('isreturn', val='issue') }}'">Return book</button>
+      </form>
+    </nav>
 {% endblock %}
