@@ -45,7 +45,7 @@ def add(b):
         task = models.Books(title=b, author=a ,publisher=p, quantity=10)
         db.session.add(task)
         db.session.commit()
-        flash('Book added')
+        flash('Book added successfully!')
         return redirect(url_for('home'))
     return redirect(url_for('adds'))
 
@@ -67,25 +67,39 @@ def adds():
 @app.route('/members/<b>', methods = ['POST', 'GET'])
 def members(b=None):
     members1 = models.Members.query.all()
-    if request.method =="POST":
-        print('x')
+    todo  = request.args.get('todo', None)
+    if todo == 'delete':
+        member2 = models.Members.query.get(b)
+        if member2:
+            db.session.delete(member2)
+            db.session.commit()
+            flash('Member details deleted successfully.')
+            return redirect(url_for('members'))
+        return redirect(url_for('members'))
     else:
-        if b==None:
-            return render_template('members.html', members1=members1, id=99999)
+        if request.method =="POST":
+            print('x')
         else:
-            return render_template('members.html', members1=members1, id= b)
+            if b==None:
+                return render_template('members.html', members1=members1, id=99999)
+            else:
+                return render_template('members.html', members1=members1, id= b)
 
 
 
 @app.route('/addme', methods = ['POST', 'GET'])
 def addme():
-    form = forms.AddTaskForm()
+    form = forms.AddMemberForm()
     if form.validate_on_submit():
-        task = models.Members(name_m=form.title.data, memid_m=5)
-        db.session.add(task)
-        db.session.commit()
-        flash('Member added')
-        return redirect(url_for('members'))
+        found_member=models.Members.query.filter_by(memid_m=form.mem_id.data).first()
+        if found_member:
+            flash('Member with this ID already present!')
+        else:
+            task = models.Members(name_m=form.name.data, memid_m=form.mem_id.data)
+            db.session.add(task)
+            db.session.commit()
+            flash('Member added successfully.')
+            return redirect(url_for('members'))
     return render_template('addme.html', form=form)
 
 

@@ -34,9 +34,10 @@ def bookid(title):
     #bookid = input('Enter Reference ID: ')
     #print(info['message'][0]['bookID'])
     for item in info:
-        bookidx.append(item['bookID'])
-        titlex.append(item['title'])
-        pagesx.append(item['  num_pages'])
-        authorx.append(item['authors'])
-        publisherx.append(item['publisher'])
+        if item['bookID'] not in bookidx:
+            bookidx.append(item['bookID'])
+            titlex.append(item['title'])
+            pagesx.append(item['  num_pages'])
+            authorx.append(item['authors'])
+            publisherx.append(item['publisher'])
     return titlex ,authorx, publisherx

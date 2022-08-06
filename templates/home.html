@@ -5,7 +5,7 @@
     <div class="Books">
       <h2>Books</h2>
       <form class="search_book" action="#" method="POST">
-        <p><input type = "text" id="myInput" onkeyup="myFunction()" placeholder="Search for a Book..."/></p>
+        <p><input type = "text" id="myInput" onkeyup="myFunction()" placeholder="Search for a Book or an Author..."/></p>
       </form>
       {%set id= id|int%}
 
@@ -48,15 +48,17 @@ function myFunction() {
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[1];
+    tp = tr[i].getElementsByTagName("td")[0];
     if (td) {
-      txtValue = td.textContent || td.innerText;
+      txtValue = td.innerText + tp.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
       }
     }
+
   }
 }
 </script>

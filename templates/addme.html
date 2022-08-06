@@ -7,7 +7,12 @@
     <div class="row">
       <h3>Add member</h3>
       <div class="col">
-        {{ form.title(class="form-control") }}
+        <p>Enter Member ID:</p>
+        {{ form.mem_id(class="form-control") }}
+      </div>
+      <div class="col">
+        <p>Enter Name:</p>
+        {{ form.name(class="form-control") }}
       </div>
       <div class="col">
         {{ form.submit(class="btn btn-primary") }}

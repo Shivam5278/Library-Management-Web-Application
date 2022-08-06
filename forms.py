@@ -9,3 +9,8 @@ class AddTaskForm(FlaskForm):
 
 class DeleteTaskForm(FlaskForm):
     submit = SubmitField('Delete')
+
+class AddMemberForm(FlaskForm):
+    mem_id = StringField('ID', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired()])
+    submit = SubmitField('Submit')

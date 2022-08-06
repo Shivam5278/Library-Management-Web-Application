@@ -5,7 +5,7 @@
     <div class="right">
       <h2>Members</h2>
       <form class="search_book" action="#" method="POST">
-        <p><input type = "text" id="myInput" onkeyup="myFunction()" placeholder="Search for a Book..."/></p>
+        <p><input type = "text" id="myInput" onkeyup="myFunction()" placeholder="Search for member ID or name..."/></p>
       </form>
 {%set id= id|int%}
                 <table id="myTable" >
@@ -53,8 +53,9 @@ function myFunction() {
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[1];
+    tp = tr[i].getElementsByTagName("td")[0];
     if (td) {
-      txtValue = td.textContent || td.innerText;
+      txtValue = td.innerText + tp.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";
       } else {
@@ -77,7 +78,7 @@ function myFunction() {
     </div-->
     <nav class="navbar navbar-light bg-light">
       <form class="form-inline">
-        <button class="btn btn-outline-success" id="Add" type="button" onclick="location.href='{{ url_for('delete', book_n=id, t=2) }}'">Delete Member</button>
+        <button class="btn btn-outline-success" id="Add" type="button" onclick="location.href='{{ url_for('members', b=id, todo='delete') }}'">Delete Member</button>
         <button class="btn btn-outline-success" id="Delete" type="button" onclick="location.href='{{ url_for('addme') }}'">Add Member</button>
 
       </form>
