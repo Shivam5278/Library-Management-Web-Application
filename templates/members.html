@@ -12,8 +12,7 @@
 
                     <tr class="header">
                       <th>ID</th>
-                      <th width="50%">Name</th>
-                      <th>Options</th>
+                      <th width="70%">Name</th>
                     </tr>
 
                   {% for member in members1 %}
@@ -23,7 +22,6 @@
                             <td onclick="location.href='{{ url_for('members', b=member.id_m) }}'">
                               {{ member.name_m }}
                             </td>
-                            <td><a href="{{ url_for('delete', book_n=member.id) }}" class="btn btn-danger">Delete</a></td>
                           </tr>
                     {% else %}
                     <tr class="hov"  >
@@ -32,7 +30,6 @@
                       <td onclick="location.href='{{ url_for('members', b=member.id_m) }}'">
                         {{ member.name_m }}
                       </td>
-                      <td><a href="{{ url_for('delete', book_n=member.id) }}" class="btn btn-danger">Delete</a></td>
                     </tr>
               {% endif %}
 
@@ -87,8 +84,8 @@ function myFunction() {
       <form class="form-inline">
 
 
-        <button class="btn btn-outline-success" type="button" onclick="location.href='{{ url_for('isreturn', val='issue') }}'">Issue Book</button>
-        <button class="btn btn-outline-success" type="button" onclick="location.href='{{ url_for('isreturn', val='issue') }}'">Return book</button>
+        <button class="btn btn-outline-success" type="button" onclick="location.href='{{ url_for('isreturn', val='issue', memberid=id) }}'">Issue Book</button>
+        <button class="btn btn-outline-success" type="button" onclick="location.href='{{ url_for('isreturn', val='return', memberid=id) }}'">Return book</button>
       </form>
     </nav>
 {% endblock %}

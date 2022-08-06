@@ -1,6 +1,6 @@
 from app import app, db
 from flask import render_template, url_for, flash, session, request, get_flashed_messages, redirect, request
-from datetime import datetime
+import datetime
 
 import sys
 import models
@@ -119,12 +119,21 @@ def transactions():
 
 
 
-@app.route('/isreturn<val>')#, method = ['POST', 'GET'])
+@app.route('/isreturn<val>',methods = ['POST', 'GET'])
 def isreturn(val):
+    form = forms.AddTransactionForm()
+    date= datetime.date.today()
+    memberid  = request.args.get('memberid', None)
+    bookid  = request.args.get('bookid', None)
+    members = models.Members.query.all()
+    books = models.Books.query.all()
+
+    found_member=models.Members.query.filter_by(id_m=memberid).first()
+    found_book=models.Books.query.filter_by(id=bookid).first()
     if val == "issue":
-        return render_template('isreturn.html', transaction=val)
+        return render_template('isreturn.html', transaction=val, member=found_member, book=found_book, form=form, date= date, members=members)
     elif val == "return":
-        return render_template('isreturn.html', transaction=val)
+        return render_template('isreturn.html', transaction=val, member=found_member, book=found_book, form=form, date= date, members=members, books=books)
     else:
         flash('Page not found!')
         return redirect(url_for('home'))

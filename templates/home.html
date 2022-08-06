@@ -75,8 +75,8 @@ function myFunction() {
                 <form class="form-inline">
 
 
-                  <button class="btn btn-outline-success" type="button" onclick="location.href='{{ url_for('isreturn', val='issue') }}'">Issue Book</button>
-                  <button class="btn btn-outline-success" type="button" onclick="location.href='{{ url_for('isreturn', val='issue') }}'">Return book</button>
+                  <button class="btn btn-outline-success" type="button" onclick="location.href='{{ url_for('isreturn', val='issue', bookid=id) }}'">Issue Book</button>
+                  <button class="btn btn-outline-success" type="button" onclick="location.href='{{ url_for('isreturn', val='return', bookid=id) }}'">Return book</button>
                 </form>
               </nav>
     </div>

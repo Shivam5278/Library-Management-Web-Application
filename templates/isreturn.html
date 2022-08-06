@@ -2,5 +2,59 @@
 
 {% block main %}
   <h1>{{transaction}}</h1>
+<h1>{{book.title}}</h1>
+<h1>{{member.name_m}}</h1>
 
+
+<div class="col">
+  <p>Enter Member ID:</p>
+  {{ form.mem_id(class="form-control" ,value=member.memid_m, autoComplete="on" ,list="Membersid") }}
+</div>
+
+<div class="col">
+<p>Enter Name:</p>
+  {{ form.name(class="form-control" ,value=member.name_m, autoComplete="on" ,list="Members") }}
+</div>
+
+<div class="col">
+  <p>Enter Book Name:</p>
+  {{ form.book(class="form-control" ,value=book.title, autoComplete="on" ,list="Books") }}
+</div>
+
+{% if transaction=='return'%}
+<div class="col">
+  <p>Issue Date:  {{date}}</p>
+</div>
+
+<div class="col">
+  <p>Enter Due Date:</p>
+  {{ form.rdate() }}
+</div>
+
+
+<div class="col">
+  <p>Return Date:  {{date}}</p>
+</div>
+{%endif%}
+<div class="col">
+  {{ form.submit(class="btn btn-primary") }}
+</div>
+
+<div>
+    <datalist id="Members">
+      {%for b in members%}
+        <option>{{b.name_m}}</option>
+        {%endfor%}
+    </datalist>
+    <datalist id="Membersid">
+      {%for b in members%}
+        <option>{{b.memid_m}}</option>
+        {%endfor%}
+    </datalist>
+    <datalist id="Books">
+      {%for b in books%}
+        <option>{{b.title}}</option>
+        {%endfor%}
+    </datalist>
+</div>
 {% endblock %}

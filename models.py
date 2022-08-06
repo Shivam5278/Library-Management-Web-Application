@@ -9,7 +9,7 @@ class Books(db.Model):
 
 
     def __repr__(self):
-        return f'{self.title}'
+        return f'{self.title} {self.author}'
 
 class Members(db.Model):
     id_m = db.Column(db.Integer, primary_key=True)
@@ -18,7 +18,7 @@ class Members(db.Model):
 
 
     def __repr__(self):
-        return f'{self.name_m}'
+        return f'{self.name_m} {self.memid_m}'
 
 class Transactions(db.Model):
     id_t = db.Column(db.Integer, primary_key=True)
