@@ -28,10 +28,10 @@ def delete(book_n):
             if form.submit.data:
                 db.session.delete(bookn)
                 db.session.commit()
-                flash('book deleted')
+                flash('Book deleted successfully!')
             return redirect(url_for('home'))
         return render_template('delete.html', form=form, book_n=book_n, title=bookn)
-    flash(f'Task with id {book_n} does not exit')
+    flash(f'Please select a book before deleting.')
     return redirect(url_for('home'))
 
 @app.route('/add/<b>', methods=['GET', 'POST'])
@@ -73,8 +73,9 @@ def members(b=None):
         if member2:
             db.session.delete(member2)
             db.session.commit()
-            flash('Member details deleted successfully.')
+            flash('Member details deleted successfully!')
             return redirect(url_for('members'))
+        flash('Please select a member to delete details.')
         return redirect(url_for('members'))
     else:
         if request.method =="POST":
