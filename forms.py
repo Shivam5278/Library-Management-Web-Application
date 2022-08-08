@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DateField
+from wtforms import StringField, SubmitField, DateField, IntegerField
 from wtforms.validators import DataRequired
 
 
@@ -19,5 +19,6 @@ class AddTransactionForm(FlaskForm):
     mem_id = StringField('ID', validators=[DataRequired()])
     name = StringField('Name', validators=[DataRequired()])
     book = StringField('Book', validators=[DataRequired()])
-    rdate = DateField('Start', validators=[DataRequired()], format = '%d-%m-%Y')
+    rent = IntegerField('Rent', validators=[DataRequired()])
+    rdate = DateField('Date', validators=[DataRequired()], format = '%Y-%m-%d' )
     submit = SubmitField('Submit')

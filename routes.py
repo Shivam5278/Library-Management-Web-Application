@@ -131,7 +131,20 @@ def isreturn(val):
 
     found_member=models.Members.query.filter_by(id_m=memberid).first()
     found_book=models.Books.query.filter_by(id=bookid).first()
+
+
+
     if val == "issue":
+        if request.method=='POST':
+            if form.validate_on_submit():
+
+                task = models.Transactions(name_t=form.name.data, memid_t=form.mem_id.data, title_t=form.book.data, issue_t=date, due_t=form.rdate.data, rent_t=form.rent.data)
+                db.session.add(task)
+                db.session.commit()
+                return redirect(url_for('home'))
+            else:
+                flash(f'{form.errors}')
+                return redirect(url_for('addme'))
         return render_template('isreturn.html', transaction=val, member=found_member, book=found_book, form=form, date= date, members=members)
     elif val == "return":
         return render_template('isreturn.html', transaction=val, member=found_member, book=found_book, form=form, date= date, members=members, books=books)
