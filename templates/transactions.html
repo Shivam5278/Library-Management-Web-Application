@@ -3,21 +3,16 @@
 {% block main %}
 
     <div class="right">
-      <table class="fixedtable" border="1">
-        <tbody>
-          <tr>
-            <td colspan="3">
-              <div class="scro">
-                <table id="table" >
-                  <thead  >
-                    <tr>
+      <table id="myTable"  >
+
+          <tr class="header">
+
                       <th >Name</th>
                       <th>ID</th>
-                      <th>Book</th>
+                      <th width="30%">Book</th>
                       <th>Issue Date</th>
                       <th>Options</th>
                     </tr>
-                  </thead>
                   {% for transaction in transactions1 %}
                           <tr class="hov" >
                             <td onclick="gen(this)">
@@ -44,10 +39,6 @@
 
                 </script>
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
 
     </div>
 {% endblock %}
