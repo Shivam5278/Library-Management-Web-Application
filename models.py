@@ -28,6 +28,7 @@ class Transactions(db.Model):
     issue_t = db.Column(db.Date, nullable=False)
     due_t = db.Column(db.Date, nullable=False)
     rent_t = db.Column(db.Integer, nullable=False)
+    type_t = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
         return f'{self.name_m}'

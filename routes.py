@@ -138,7 +138,7 @@ def isreturn(val):
         if request.method=='POST':
             if form.validate_on_submit():
 
-                task = models.Transactions(name_t=form.name.data, memid_t=form.mem_id.data, title_t=form.book.data, issue_t=date, due_t=form.rdate.data, rent_t=form.rent.data)
+                task = models.Transactions(name_t=form.name.data, memid_t=form.mem_id.data, title_t=form.book.data, issue_t=date, due_t=form.rdate.data, rent_t=form.rent.data, type_t=val)
                 db.session.add(task)
                 db.session.commit()
                 return redirect(url_for('home'))

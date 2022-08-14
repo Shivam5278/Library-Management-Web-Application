@@ -10,6 +10,7 @@
                       <th >Name</th>
                       <th>ID</th>
                       <th width="30%">Book</th>
+                      <th>Type</th>
                       <th>Issue Date</th>
                       <th>Options</th>
                     </tr>
@@ -21,6 +22,7 @@
                             <td>{{ transaction.memid_t }}</td>
                             <td>{{ transaction.title_t }}</td>
                             <td>{{ transaction.issue_t }}</td>
+                            <td>{{ transaction.type_t }}</td>
                             <td><a href="{{ url_for('delete', book_n=transaction.id_t) }}" class="btn btn-danger">Delete</a></td>
                           </tr>
                   {% endfor %}
