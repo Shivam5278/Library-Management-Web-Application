@@ -119,7 +119,7 @@ a{
     position: sticky;
     top: 0;
     width: 1000px !important;
-    z-index: 1; // any positive value, layer order is global
+    z-index: 1; /* any positive value, layer order is global*/
 }
 .myTable tr .selected{
     background-color: skyblue;
